@@ -25,7 +25,7 @@
 <nav class="flex justify-between bg-gray-900 text-white w-screen">
     <div class="px-5 xl:px-12 py-6 flex w-full items-center">
         <a class="text-3xl font-bold font-heading" href="index.php">
-            <img class="h-12" src="logo.png" alt="logo">
+            <img class="h-12" src="website_sprites/logo.png" alt="logo">
         </a>
         <!-- Nav Links -->
         <ul class="hidden md:flex px-4 mx-auto font-semibold font-heading space-x-12">
