@@ -22,7 +22,7 @@
 <body>
 <!-- Footer -->
 <footer class="bg-gray-900 text-white p-8 text-center">
-    <p>&copy; 2023 Your Shop. All rights reserved.</p>
+    <p>&copy; 2023 Dosro Bazar. All rights reserved.</p>
 </footer>
 </body>
 </html>
