@@ -9,8 +9,10 @@ $conn = new mysqli($servername, $username, $password, $dbname);
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
+if (isset($_SESSION["sellerid"])){
+    $sellerid = $_SESSION["sellerid"];
     // SQL query to retrieve uploads with sellerid 1
-    $sql = "SELECT * FROM products";
+    $sql = "SELECT * FROM products WHERE sellerid = '$sellerid'";
     $result = $conn->query($sql);
 
     // Check if any rows were returned
@@ -18,15 +20,13 @@ if ($conn->connect_error) {
         ?>
         <html>
         <head>
-            <title>Dosro Bazar - Home</title>
+            <title>View Products - Home</title>
         </head>
         <body class="bg-gray-100">
         <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 m-10">
             <?php
             // Output data of each row
             while ($row = $result->fetch_assoc()) {
-                $userid = $_SESSION["userid"];
-                $id = $row["id"];
                 $name = $row["name"];
                 $description = $row["description"];
                 $beforeprice = $row["beforePrice"];
@@ -36,7 +36,7 @@ if ($conn->connect_error) {
                 ?>
                 <div class="relative w-full max-w-xs overflow-hidden rounded-lg bg-white shadow-md">
                     <a href="#">
-                        <img class="h-60 rounded-t-lg object-cover" src="uploads/<?php echo $fileName; ?>" alt="product image" style="width: 100%" />
+                        <img class="h-60 rounded-t-lg object-cover" src="uploads/<?php echo $fileName; ?>" alt="product image" style="width: 100%"/>
                     </a>
                     <span class="absolute top-0 left-0 w-28 translate-y-4 -translate-x-6 -rotate-45 bg-black text-center text-sm text-white">Sale</span>
                     <div class="mt-4 px-5 pb-5">
@@ -50,16 +50,7 @@ if ($conn->connect_error) {
                                 <span class="text-sm text-slate-900 line-through"><?php echo $afterprice?></span>
                             </p>
                         </div>
-                        <div class="ml-5 inline-block">
-                            <div class="flex">
-                                <a href="contact.php" class="bg-green-500 text-white px-4 py-2 rounded-md mt-4 hover:bg-green-600 transition duration-300">Buy Now</a>
-                                <form action="cart.php" method="post"  class="ml-2">
-                                    <input type="hidden" name="id" value="<?php echo $id;?>">
-                                    <button class="bg-blue-500 text-white px-4 py-2 rounded-md mt-4 hover:bg-blue-600 transition duration-300">Add to Cart</button>
-                                </form>
-                            </div>
-                        </div>
-                        </div>
+                    </div>
                 </div>
                 <?php
             }
@@ -68,7 +59,10 @@ if ($conn->connect_error) {
         </body>
         </html>
         <?php
+    } else {
+        echo "No uploads found for sellerid 1";
     }
+}
 ?>
 <?php
 include "footer.php";

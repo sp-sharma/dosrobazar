@@ -19,10 +19,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 // Insert data into the database
     $sql = "INSERT INTO userlogin (name, username, password, address, contactnumber) 
-        VALUES ('$name', '$username', '$password', '$address', '$contactnumber')";
+        VALUES ('$name', '$email', '$password', '$address', '$contactnumber')";
 
     if ($conn->query($sql) === TRUE) {
         //echo "New record created successfully";
+        header('Location:userlogin.php');
     } else {
         echo "Error: " . $sql . "<br>" . $conn->error;
     }
